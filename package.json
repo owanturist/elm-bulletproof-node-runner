@@ -38,7 +38,6 @@
   "dependencies": {
     "find-parent-dir": "^0.3.0",
     "fs-extra": "^8.1.0",
-    "minimist": "^1.2.0",
-    "which": "^2.0.2"
+    "minimist": "^1.2.0"
   }
 }
