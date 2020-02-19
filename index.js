@@ -3,17 +3,13 @@
 const fs = require('fs');
 const fs_ = require('fs-extra');
 const path = require('path');
-const which = require('which');
 const minimist = require('minimist');
-const spawn = require('cross-spawn');
 const findParentDir = require('find-parent-dir');
-const elmCompiler = require('node-elm-compiler');
 
 const packageJson = require('./package.json');
 const elmJson = require('./runner/elm.json');
 
 const VERSION = packageJson.version;
-const PATH_TO_ELM = which.sync('elm');
 
 process.title = 'elm-bulletproof';
 
@@ -61,36 +57,6 @@ function getGeneratedCodeDir(projectRootDir) {
     );
 }
 
-function spawnCompiler(pathToElm, processArgs, processOpts) {
-    const finalOpts = Object.assign(
-        { env: process.env },
-        processOpts,
-        {
-            stdio: [ process.stdin, 'ignore', process.stderr ]
-        }
-    );
-
-    return spawn(pathToElm, processArgs, finalOpts);
-}
-
-function compile(filepath, dest, pathToElmBin) {
-    return new Promise((resolve, reject) => {
-        const compilation = elmCompiler.compile([ filepath ], {
-            spawn: spawnCompiler,
-            output: dest,
-            pathToElm: pathToElmBin
-        });
-
-        compilation.on('close', exitCode => {
-            if (exitCode === 0) {
-                resolve();
-            } else {
-                reject('Compilation failed');
-            }
-        });
-    });
-}
-
 // B U I L D   A N D   R U N
 
 buildAndRun();
@@ -132,14 +98,6 @@ function generateAndRun(foo) {
     generateELmJson(foo, generatedCodeDir, elmJson);
     generateBulletproofRunner(foo.module, generatedCodeDir);
     process.chdir(generatedCodeDir);
-
-    compile(
-        path.join('src', 'Bulletproof', 'Internal', 'Runner.elm'),
-        path.resolve(path.join(generatedCodeDir, 'elmBulletproofOutput.js')),
-        PATH_TO_ELM
-    )
-        .then(() => process.exit(0))
-        .catch(() => process.exit(1));
 }
 
 

@@ -36,11 +36,9 @@
     "eslint-plugin-node": "^11.0.0"
   },
   "dependencies": {
-    "cross-spawn": "^7.0.1",
     "find-parent-dir": "^0.3.0",
     "fs-extra": "^8.1.0",
     "minimist": "^1.2.0",
-    "node-elm-compiler": "^5.0.4",
     "which": "^2.0.2"
   }
 }
