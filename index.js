@@ -9,8 +9,8 @@ const spawn = require('cross-spawn');
 const findParentDir = require('find-parent-dir');
 const elmCompiler = require('node-elm-compiler');
 
-const packageJson = require('../package.json');
-const elmJson = require('../runner/elm.json');
+const packageJson = require('./package.json');
+const elmJson = require('./runner/elm.json');
 
 const VERSION = packageJson.version;
 const PATH_TO_ELM = which.sync('elm');
