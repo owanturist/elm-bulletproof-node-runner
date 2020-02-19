@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended"
+  ],
+
+  "env": {
+    "browser": false,
+    "node": true
+  },
+
+  "rules": {
+    // P O S S I B L E   E R R O R S
+    "no-extra-parens": "error",
+    "no-var": "error",
+
+    // S T R I C T   M O D E
+    "strict": "error",
+
+    // V A R I A B L E S
+    "no-shadow": "error",
+
+    // S T Y L I S T I C   I S S U E S
+    "semi": "error",
+    "semi-spacing": "error",
+    "semi-style": "error",
+
+    // N O D E   A N D   C O M M O N J S
+    "no-process-exit": "off"
+  }
+}
