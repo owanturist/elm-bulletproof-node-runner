@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs');
-const fs_ = require('fs-extra');
+const fs = require('fs-extra');
 const path = require('path');
 const minimist = require('minimist');
 const findParentDir = require('find-parent-dir');
@@ -160,7 +159,7 @@ function generateELmJson(foo, generatedCodeDir, runnerJson) {
     // it will update the timestamp on the file, which will cause `elm make`
     // to do a bunch of unnecessary work
     if (!fs.existsSync(jsonPath) || json !== fs.readFileSync(jsonPath, 'utf8')) {
-        fs_.ensureFileSync(jsonPath);
+        fs.ensureFileSync(jsonPath);
         fs.writeFileSync(jsonPath, json);
     }
 }
@@ -183,7 +182,7 @@ main =
     `;
 
     if (!fs.existsSync(codePath) || code !== fs.readFileSync(codePath, 'utf8')) {
-        fs_.ensureFileSync(codePath);
+        fs.ensureFileSync(codePath);
         fs.writeFileSync(codePath, code);
     }
 }
